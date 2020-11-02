@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+    "aoc2018/soln"
 )
 
 func main() {
-	fmt.Println(ReadLines("day01/data.txt"))
+    soln.Solve1()
 }

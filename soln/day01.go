@@ -1,19 +1,18 @@
 package soln
 
 import (
-	"fmt"
+    "fmt"
+    
 	"aoc2018/util"
 )
 
-// Solve1 : prints the solutions for day 01
-func Solve1() {
+func solve1() {
     data := util.ReadLines("data/day01.txt")
-    resultingFrequency := calculateResultingFrequency(0, data)
 
+    resultingFrequency := calculateResultingFrequency(0, data)
     fmt.Printf("1A: %d\n", resultingFrequency)
 
     firstRepeatedFrequency := calculateFirstRepeatedFrequency(data)
-
     fmt.Printf("1B: %d\n", firstRepeatedFrequency)
 }
 

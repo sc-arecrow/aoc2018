@@ -5,5 +5,9 @@ import (
 )
 
 func main() {
-    soln.Solve1()
+    solveDayN(2)
+}
+
+func solveDayN(n int) {
+    soln.GetSolution(n)()
 }

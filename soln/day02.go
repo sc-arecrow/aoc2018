@@ -8,8 +8,9 @@ import (
 )
 
 func solve2() {
-    data := util.ReadLines("data/day02.txt")
-    counts := getCharCounts(data)
+    data := util.ReadLines("data/day02.txt", " ")
+    ids := getIds(data)
+    counts := getCharCountsArray(ids)
 
     checksum := calculateChecksum(counts)
     fmt.Printf("2A: %d\n", checksum)
@@ -18,10 +19,20 @@ func solve2() {
     fmt.Printf("2B: %s\n", commonLetters)
 }
 
-type charCounts []util.CharCount
+func getIds(data [][]string) []string {
+    ids := []string{}
 
-func getCharCounts(ids []string) charCounts {
-    counts := make(charCounts, len(ids))
+    for _, datum := range data {
+        ids = append(ids, datum[0])
+    }
+
+    return ids
+}
+
+type charCountsArray []util.CharCount
+
+func getCharCountsArray(ids []string) charCountsArray {
+    counts := make(charCountsArray, len(ids))
 
     for i, id := range ids {
         counts[i] = util.NewCharCount(id)
@@ -30,10 +41,10 @@ func getCharCounts(ids []string) charCounts {
     return counts
 }
 
-func calculateChecksum(counts charCounts) int {
+func calculateChecksum(charCounts charCountsArray) int {
     countTwice, countThrice := 0, 0
 
-    for _, charCount := range counts {
+    for _, charCount := range charCounts {
         if containsLetterNTimes(charCount, 2) {
             countTwice++
         }
@@ -56,13 +67,13 @@ func containsLetterNTimes(charCount util.CharCount, n int) bool {
     return false
 }
 
-func getCommonLetters(counts charCounts) string {
-    for i := 0; i < len(counts); i++ {
-        for j := i + 1; j < len(counts); j++ {
-            firstDiff, isCommonIds := getFirstDiffCharFromCommonIds(counts[i].GetString(), counts[j].GetString())
+func getCommonLetters(charCounts charCountsArray) string {
+    for i := 0; i < len(charCounts); i++ {
+        for j := i + 1; j < len(charCounts); j++ {
+            firstDiff, isCommonIds := getFirstDiffCharFromCommonIds(charCounts[i].GetString(), charCounts[j].GetString())
 
             if isCommonIds {
-                return removeFirstRune(counts[i].GetString(), firstDiff)
+                return removeFirstRune(charCounts[i].GetString(), firstDiff)
             }
         }
     }

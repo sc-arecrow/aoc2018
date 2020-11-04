@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-    solveDayN(2)
+    solveDayN(3)
 }
 
 func solveDayN(n int) {
